@@ -16,7 +16,7 @@ class Notes(db.Model):
     def __repr__(self):
         return f"Note {self.id}"
 
-@app.route('/')
+@app.route('/', methods= ['POST', 'GET'])
 
 
 def index():
@@ -30,7 +30,7 @@ def index():
 
         try:
             db.session.add(new_note)
-            db.session.commit
+            db.session.commit()
             return redirect('/')
 
         except:
@@ -38,6 +38,14 @@ def index():
     else:
         all_notes = Notes.query.order_by(Notes.date_created).all()
         return render_template('index.html', notes = all_notes)
+
+
+@app.route('/view/<int:id>', methods=['GET'])
+def view(id):
+ note_to_get = Notes.query.get_or_404(id)
+
+ return render_template('view.html', note = note_to_get)
+
 
 
 if __name__ == "__main__":

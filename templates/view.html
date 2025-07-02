@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+{% if note %}
+<div class="viewed_note">
+  <a href="/" class="btn btn-back">← Back to Notes</a>
+    <h1>{{note.title}}</h1>
+    <p class="full-content">{{note.content}}</p>
+    <small>{{note.date_created}}</small>
+</div>
+{%endif%}
+{% endblock %}

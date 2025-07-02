@@ -22,12 +22,12 @@
       <div class="notes-grid">
         {% for note in notes %}
         <div class="note-card">
-           <h3> </h3>
-           <p> </p>
-           <small> </small>
+           <h3>{{note.title}}</h3>
+           <p>{{note.content}} </p>
+           <small>{{note.date_created}}</small>
 
            <div class="note-actions">
-
+              <a href="/view/{{note.id}}">View</a>
            </div>
 
 </div>

@@ -1,3 +1,8 @@
+/* Google Fonts Import (REPLACE existing one in base.html <head> section) */
+/* This ensures Lora and Roboto are available for the new elements */
+/* <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> */
+
+/* Basic Reset & Box-sizing */
 *,
 *::before,
 *::after {
@@ -19,7 +24,7 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-/* Header Styling (from previous iteration - kept for consistency) */
+/* Header Styling */
 header {
     background-color: rgba(30, 42, 58, 0.9); /* Dark blue with slight transparency */
     color: #D4AF37; /* Rich gold accent for header text */
@@ -42,8 +47,8 @@ header h1 {
     font-weight: 700;
 }
 
-/* Main Content Container Styling (for both the form div and notes-display section) */
-div { /* This targets the div containing the form and the .notes-display-section */
+/* Main Content Container Styling (for add-note, notes-display, and single note view sections) */
+div {
     background-color: rgba(30, 42, 58, 0.85); /* Dark blue card with transparency */
     padding: 3.5rem;
     border-radius: 15px; /* More rounded corners */
@@ -57,10 +62,11 @@ div { /* This targets the div containing the form and the .notes-display-section
     -webkit-backdrop-filter: blur(5px); /* Safari support */
 }
 
-/* Headings within sections (h2) */
-div h2 { /* This targets h2 inside the form div and .notes-display-section */
+/* Headings within sections (h2 in main template, h1 in viewed_note) */
+div h2,
+.viewed_note h1 {
     font-family: 'Lora', serif;
-    color: #f0f0f0; /* Off-white for section title */
+    color: #f0f0f0;
     font-size: 2.6rem;
     margin-bottom: 2.5rem;
     position: relative;
@@ -68,10 +74,12 @@ div h2 { /* This targets h2 inside the form div and .notes-display-section */
     letter-spacing: 1.5px;
     font-weight: 700;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
-/* Underline effect for h2 */
-div h2::after { /* This targets h2::after inside the form div and .notes-display-section */
+/* Underline effect for h2 and h1 */
+div h2::after,
+.viewed_note h1::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -79,49 +87,49 @@ div h2::after { /* This targets h2::after inside the form div and .notes-display
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background: linear-gradient(to right, #D4AF37, #008080); /* Gold to Teal gradient */
+    background: linear-gradient(to right, #D4AF37, #008080);
     border-radius: 5px;
 }
 
-/* Form Styling (from previous iteration - kept for consistency) */
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    gap: 1.8rem; /* More generous spacing between form elements */
+    gap: 1.8rem;
     align-items: center;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 1.4rem; /* Even more padding for a substantial feel */
-    background-color: rgba(42, 59, 76, 0.7); /* Darker input background with transparency */
-    color: #f0f0f0; /* Light text in input */
-    border: 1px solid rgba(136, 153, 170, 0.3); /* Softer, translucent border */
-    border-radius: 10px; /* More rounded input fields */
+    padding: 1.4rem;
+    background-color: rgba(42, 59, 76, 0.7);
+    color: #f0f0f0;
+    border: 1px solid rgba(136, 153, 170, 0.3);
+    border-radius: 10px;
     font-size: 1.2rem;
     transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2); /* Subtle inner shadow for depth */
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 input[type="text"]::placeholder {
     font-family: 'Roboto', sans-serif;
-    color: #8899aa; /* Muted light gray placeholder text */
+    color: #8899aa;
     font-style: normal;
-    opacity: 0.7; /* Slightly more transparent */
+    opacity: 0.7;
 }
 
 input[type="text"]:focus {
-    border-color: #D4AF37; /* Gold accent on focus */
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), inset 0 1px 5px rgba(0, 0, 0, 0.3); /* Stronger gold glow */
-    background-color: rgba(50, 70, 90, 0.8); /* Slightly lighter and more opaque on focus */
+    border-color: #D4AF37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), inset 0 1px 5px rgba(0, 0, 0, 0.3);
+    background-color: rgba(50, 70, 90, 0.8);
     outline: none;
 }
 
-/* Submit Button Styling (from previous iteration - kept for consistency) */
+/* Submit Button Styling */
 input[type="submit"] {
-    background: linear-gradient(45deg, #D4AF37, #008080); /* Gold to Teal gradient button */
-    color: #121212; /* Dark text on the button for contrast */
-    padding: 1.4rem 3rem; /* More generous padding */
+    background: linear-gradient(45deg, #D4AF37, #008080);
+    color: #121212;
+    padding: 1.4rem 3rem;
     border: none;
     border-radius: 10px;
     font-size: 1.3rem;
@@ -132,13 +140,13 @@ input[type="submit"] {
     min-width: 200px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2); /* Multi-layer button shadow */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow on button */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 input[type="submit"]:hover {
-    background: linear-gradient(45deg, #008080, #D4AF37); /* Reverse gradient on hover */
-    transform: translateY(-5px); /* More pronounced lift */
+    background: linear-gradient(45deg, #008080, #D4AF37);
+    transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
@@ -147,81 +155,79 @@ input[type="submit"]:active {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* --- NEW STYLES FOR NOTES DISPLAY SECTION --- */
+/* --- STYLES FOR NOTES DISPLAY SECTION --- */
 
 .notes-display-section {
-    /* The general 'div' rule already applies the main card styling. */
-    /* This section can contain overrides or specific children styles. */
-    margin-top: 4rem; /* Ensure good spacing after the add note section */
+    margin-top: 4rem;
 }
 
 .notes-grid {
-    display: grid; /* Use CSS Grid for a flexible layout */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
-    gap: 2rem; /* Space between note cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
     width: 100%;
-    margin-top: 2rem; /* Space below the "YOUR NOTES" heading */
-    padding: 0 1rem; /* Small horizontal padding for grid */
+    margin-top: 2rem;
+    padding: 0 1rem;
 }
 
 .note-card {
-    background-color: rgba(30, 42, 58, 0.7); /* Slightly more transparent than main section */
+    background-color: rgba(30, 42, 58, 0.7);
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.08); /* Subtle shadow and border */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.08);
     display: flex;
     flex-direction: column;
-    text-align: left; /* Align text within the card to the left */
+    text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    overflow: hidden; /* Ensure no content spills */
-    min-height: 200px; /* Minimum height for cards */
+    overflow: hidden;
+    min-height: 200px;
 }
 
-.note-card::before { /* Decorative corner element */
+.note-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 20px;
     height: 20px;
-    background: #D4AF37; /* Gold accent */
+    background: #D4AF37;
     border-bottom-right-radius: 10px;
     opacity: 0.7;
 }
 
 .note-card:hover {
-    transform: translateY(-8px); /* Lift effect on hover */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(212, 175, 55, 0.2); /* Enhanced shadow on hover */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
 .note-card h3 {
     font-family: 'Lora', serif;
     font-size: 1.8rem;
-    color: #D4AF37; /* Gold for note titles */
+    color: #D4AF37;
     margin-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15); /* Subtle separator */
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     padding-bottom: 0.5rem;
-    word-wrap: break-word; /* Prevent long words from overflowing */
+    word-wrap: break-word;
 }
 
 .note-card p {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    color: #c0c0c0; /* Lighter gray for content */
+    color: #c0c0c0;
     margin-bottom: 1rem;
-    flex-grow: 1; /* Allow content to take available space */
+    flex-grow: 1;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for long content */
+    text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Limit content to 4 lines */
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 
 .note-card small {
     font-size: 0.85rem;
-    color: #8899aa; /* Muted color for date */
-    margin-top: auto; /* Push date to bottom */
+    color: #8899aa;
+    margin-top: auto;
     display: block;
     text-align: right;
 }
@@ -229,11 +235,27 @@ input[type="submit"]:active {
 .note-actions {
     margin-top: 1.5rem;
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    gap: 1rem; /* Space between buttons */
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
-/* Button styles for Edit/Delete links */
+/* Styling for the clickable area of the note card (if you choose to add a link) */
+.note-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.note-link:hover h3 {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+/* Button styles (if you add buttons) */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -247,23 +269,36 @@ input[type="submit"]:active {
 }
 
 .btn-edit {
-    background-color: #008080; /* Teal for edit */
+    background-color: #008080;
     color: white;
 }
 
 .btn-edit:hover {
-    background-color: #006666; /* Darker teal on hover */
+    background-color: #006666;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btn-delete {
-    background-color: #e94560; /* Muted red for delete */
+    background-color: #e94560;
     color: white;
 }
 
 .btn-delete:hover {
-    background-color: #cc334c; /* Darker red on hover */
+    background-color: #cc334c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-back {
+    background-color: #8899aa;
+    color: white;
+    margin-bottom: 2rem;
+    align-self: flex-start;
+}
+
+.btn-back:hover {
+    background-color: #707f8e;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -281,22 +316,67 @@ input[type="submit"]:active {
     max-width: 500px;
 }
 
+/* --- STYLES FOR SINGLE NOTE VIEW PAGE (.viewed_note) --- */
+.viewed_note {
+    text-align: left;
+    max-width: 700px;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Inherits general div styling for background, shadow, border, etc. */
+}
 
-/* Responsive adjustments (updated to include note cards) */
+.viewed_note h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    width: 100%;
+    color: #D4AF37;
+}
+
+.viewed_note h1::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+.viewed_note p { /* Styling for the main content paragraph */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    white-space: pre-wrap; /* Preserve line breaks from content */
+    word-wrap: break-word; /* Old property, kept for compatibility */
+    overflow-wrap: break-word; /* Modern equivalent of word-wrap */
+    word-break: break-all; /* Force breaking of long, unbroken strings */
+}
+
+.viewed_note small {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 2rem;
+    text-align: left;
+    width: 100%;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     header h1 {
         font-size: 3rem;
     }
 
-    /* Apply to generic div and notes-display-section */
     div,
-    .notes-display-section {
+    .viewed_note {
         padding: 2.5rem;
         max-width: 95%;
     }
 
     div h2 {
         font-size: 2rem;
+    }
+
+    .viewed_note h1 {
+        font-size: 2.2rem;
     }
 
     input[type="text"] {
@@ -311,7 +391,7 @@ input[type="submit"]:active {
     }
 
     .notes-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust min-width for smaller screens */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.5rem;
     }
 
@@ -326,18 +406,26 @@ input[type="submit"]:active {
 
     .note-card p {
         font-size: 0.95rem;
-        -webkit-line-clamp: 3; /* Limit content to 3 lines on smaller screens */
+        -webkit-line-clamp: 3;
     }
 
     .note-actions {
-        flex-direction: column; /* Stack buttons on very small screens */
+        flex-direction: column;
         gap: 0.8rem;
-        align-items: flex-end; /* Align stacked buttons to the right */
+        align-items: flex-end;
     }
 
     .btn {
-        width: 100%; /* Make buttons full width when stacked */
+        width: 100%;
         text-align: center;
+    }
+
+    .viewed_note {
+        padding: 2.5rem;
+    }
+
+    .viewed_note p {
+        font-size: 1rem;
     }
 }
 
@@ -347,9 +435,8 @@ input[type="submit"]:active {
         letter-spacing: 2px;
     }
 
-    /* Apply to generic div and notes-display-section */
     div,
-    .notes-display-section {
+    .viewed_note {
         padding: 1.8rem;
         border-radius: 10px;
     }
@@ -357,6 +444,10 @@ input[type="submit"]:active {
     div h2 {
         font-size: 1.6rem;
         margin-bottom: 1.8rem;
+    }
+
+    .viewed_note h1 {
+        font-size: 1.8rem;
     }
 
     input[type="text"] {
@@ -373,7 +464,7 @@ input[type="submit"]:active {
     }
 
     .notes-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;
         gap: 1.2rem;
     }
 
@@ -388,11 +479,19 @@ input[type="submit"]:active {
 
     .note-card p {
         font-size: 0.9rem;
-        -webkit-line-clamp: 4; /* Allow more lines if space permits on single column */
+        -webkit-line-clamp: 4;
     }
 
     .no-notes-message {
         padding: 1rem;
         font-size: 1rem;
+    }
+
+    .viewed_note {
+        padding: 1.8rem;
+    }
+
+    .viewed_note p {
+        font-size: 0.95rem;
     }
 }

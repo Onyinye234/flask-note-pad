@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 
 # Ignore virtual environment
-my env/
+myenv/
 
 # Ignore SQLite database
 test.db
