@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block body %}
+<header><h1>NOTE APP</h1></header>
+<div>
+    <h2>ADD A NEW NOTE </h2>
+
+    
+    <form action="/" method="POST">
+
+        <input type="text" name="title" id="title" placeholder="Enter title...."> 
+        <input type="text" name="content" id="content" placeholder="Enter content...." size="40" > 
+        <input type="submit" value="Create note">
+
+
+
+    </form>
+</div>
+
+<div class="notes-display-section">
+    <h2>YOUR NOTES</h2>
+    {% if notes %}
+      <div class="notes-grid">
+        {% for note in notes %}
+        <div class="note-card">
+           <h3> </h3>
+           <p> </p>
+           <small> </small>
+
+           <div class="note-actions">
+
+           </div>
+
+</div>
+{% endfor %}
+</div>
+{% else %}
+<p class="no-notes-message">You don't have any notes yet. Start by adding one above!</p>
+{% endif %}
+</div>
+
+{% endblock %}
