@@ -47,6 +47,23 @@ def view(id):
  return render_template('view.html', note = note_to_get)
 
 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    note_to_update = Notes.query.get_or_404(id)
+    if request.method == 'POST':
+        note_to_update.title = request.form['title']
+        note_to_update.content = request.form['content']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Error occurred while editing note"
+
+
+    else:
+        return render_template('update.html', note=note_to_update)
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

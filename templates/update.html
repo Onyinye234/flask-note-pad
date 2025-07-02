@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+{% if note %}
+<div>
+<a href="/" class="btn btn-back">← Back to Notes</a>
+<form action="/update/{{note.id}}", method="POST">
+<input type="text", name="title", id="title", value="{{note.title}}">
+<input type="text", name="content", id="content", value="{{note.content}}">
+
+<input type="submit" value="Edit">
+</form>
+
+</div>
+  
+
+{%endif%}
+{% endblock %}
