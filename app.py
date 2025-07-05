@@ -54,6 +54,8 @@ def update(id):
         note_to_update.title = request.form['title']
         note_to_update.content = request.form['content']
 
+    
+
         try:
             db.session.commit()
             return redirect('/')
@@ -63,6 +65,17 @@ def update(id):
 
     else:
         return render_template('update.html', note=note_to_update)
+    
+
+@app.route('/delete/<int:id>', methods=['POST','GET'])
+def delete(id):
+    task_to_delete = Notes.query.get_or_404(id)
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return "Error occurred while deleting note"
     
 
 if __name__ == "__main__":

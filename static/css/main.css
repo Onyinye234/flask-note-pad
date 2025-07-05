@@ -1,8 +1,3 @@
-/* Google Fonts Import (REPLACE existing one in base.html <head> section) */
-/* This ensures Lora and Roboto are available for the new elements */
-/* <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> */
-
-/* Basic Reset & Box-sizing */
 *,
 *::before,
 *::after {
@@ -13,7 +8,7 @@
 
 body {
     font-family: 'Roboto', sans-serif; /* Clean, modern sans-serif for body text */
-    background: linear-gradient(135deg, #121212 0%, #0a0a0a 100%); /* Deep, dark gradient background */
+    background: #D4AF37 !important; /* TEMPORARY: BRIGHT PURPLE FOR DEBUGGING */
     color: #f0f0f0; /* Soft off-white text for high contrast */
     line-height: 1.6;
     display: flex;
@@ -48,7 +43,6 @@ header h1 {
 }
 
 /* Main Content Container Styling (for add-note, notes-display, single note view, and update sections) */
-/* This rule applies to the div in your main template, .viewed_note, and the div in update.html */
 div {
     background-color: rgba(30, 42, 58, 0.85); /* Dark blue card with transparency */
     padding: 3.5rem;
@@ -256,53 +250,109 @@ input[type="submit"]:active {
     text-decoration: underline;
 }
 
-/* Button styles (if you add buttons) */
+/* Button styles for Edit/Delete links (and new Back button) */
 .btn {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 1.6rem;
     border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none !important; /* Ensure no underline, even with !important */
     text-transform: uppercase;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid transparent; /* Default transparent border */
+}
+
+/* Pseudo-element for elegant hover background fill */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 128, 128, 0.1)); /* Subtle transparent gradient */
+    z-index: -1;
+    transition: transform 0.3s ease;
+    transform: scaleX(0); /* Start hidden */
+    transform-origin: left;
+}
+
+.btn:hover::before {
+    transform: scaleX(1); /* Expand on hover */
+}
+
+.btn-view {
+    background-color: rgba(0, 128, 128, 0.1); /* Subtle background */
+    color: #008080; /* Teal text */
+    border-color: rgba(0, 128, 128, 0.6); /* Teal border */
+}
+
+.btn-view:hover {
+    color: white; /* White text on hover */
+    transform: translateY(-4px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 128, 128, 0.5); /* Enhanced shadow */
+    border-color: transparent; /* Border disappears on hover */
 }
 
 .btn-edit {
-    background-color: #008080;
-    color: white;
+    background-color: rgba(0, 128, 128, 0.1); /* Very subtle background */
+    color: #008080; /* Teal text */
+    border-color: rgba(0, 128, 128, 0.6); /* Teal border */
+}
+
+.btn-edit::before {
+    background: linear-gradient(135deg, #008080, #006666); /* Teal gradient fill */
 }
 
 .btn-edit:hover {
-    background-color: #006666;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white; /* White text on hover */
+    transform: translateY(-4px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 128, 128, 0.5); /* Enhanced shadow */
+    border-color: transparent; /* Border disappears on hover */
 }
 
 .btn-delete {
-    background-color: #e94560;
-    color: white;
+    background-color: rgba(233, 69, 96, 0.1); /* Very subtle background */
+    color: #e94560; /* Muted red text */
+    border-color: rgba(233, 69, 96, 0.6); /* Muted red border */
+}
+
+.btn-delete::before {
+    background: linear-gradient(135deg, #e94560, #cc334c); /* Red gradient fill */
 }
 
 .btn-delete:hover {
-    background-color: #cc334c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white; /* White text on hover */
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(233, 69, 96, 0.5);
+    border-color: transparent;
 }
 
 .btn-back {
-    background-color: #8899aa;
-    color: white;
+    background-color: rgba(136, 153, 170, 0.1); /* Very subtle background */
+    color: #8899aa; /* Muted gray text */
+    border-color: rgba(136, 153, 170, 0.6); /* Muted gray border */
     margin-bottom: 2rem;
     align-self: flex-start;
 }
 
-.btn-back:hover {
-    background-color: #707f8e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.btn-back::before {
+    background: linear-gradient(135deg, #707f8e, #8899aa); /* Gray gradient fill */
 }
+
+.btn-back:hover {
+    color: white; /* White text on hover */
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(136, 153, 170, 0.5);
+    border-color: transparent;
+}
+
 
 .no-notes-message {
     text-align: center;
@@ -363,21 +413,12 @@ input[type="submit"]:active {
 /* --- NEW STYLES FOR UPDATE PAGE --- */
 /* The main div in update.html will inherit the general 'div' styles */
 /* We need to ensure inputs are styled correctly within this context */
-.update-note-form { /* Adding a class for more specific targeting if needed */
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem; /* Consistent spacing */
-    align-items: center; /* Center elements within the form */
-    width: 100%; /* Ensure it takes full width of its parent div */
-}
+/* No specific class on the div in update.html, so it will use the general div rule */
 
 /* Styling for the input fields in update.html */
-/* Since your update.html uses type="text" and type="content" (which is not a standard HTML input type),
-   I'll target input[type="text"] and input[type="content"] specifically.
-   For 'content', it's usually a <textarea>. If it's meant to be a textarea, please adjust your HTML.
-   Assuming you intend these to be input fields for now. */
+/* Targeting inputs by type and name to be specific to update.html's inputs */
 input[type="text"][name="title"],
-input[type="content"][name="content"] { /* Targeting inputs by type and name */
+input[type="content"][name="content"] { /* Note: type="content" is not standard HTML. Consider using <textarea> for content. */
     width: 100%;
     padding: 1.4rem;
     background-color: rgba(42, 59, 76, 0.7);
@@ -536,4 +577,9 @@ input[type="content"][name="content"]:focus {
     .viewed_note p {
         font-size: 0.95rem;
     }
+}
+
+a{
+    color: #D4AF37;
+    text-decoration: none;
 }
